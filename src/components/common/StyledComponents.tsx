@@ -1,7 +1,7 @@
 'use client';
 
 // Components
-import { Box, Container, Paper, styled, Typography } from '@mui/material';
+import { Box, Card, Container, Paper, styled, Typography } from '@mui/material';
 
 // Footer
 export const FooterContainer = styled(Box)(({ theme }) => ({
@@ -54,6 +54,14 @@ export const EmptyStateIconContainer = styled(Box)(({ theme }) => ({
 }));
 
 // Product Card
+
+export const ProductCardContainer = styled(Card)(() => ({
+  transition: 'transform 0.2s, box-shadow 0.2s',
+  '&:hover': {
+    transform: 'translateY(-4px)',
+    boxShadow: 4
+  }
+}));
 export const ProductCardTitle = styled(Typography)(() => ({
   display: '-webkit-box',
   overflow: 'hidden',
@@ -70,4 +78,14 @@ export const NotFoundContainer = styled(Container)(({ theme }) => ({
   justifyContent: 'center',
   marginTop: 'auto',
   gap: theme.spacing(1.5)
+}));
+
+// Sort Controls
+export const SortControlsContainer = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  flexWrap: 'wrap',
+  gap: theme.spacing(2),
+  marginBottom: theme.spacing(3)
 }));

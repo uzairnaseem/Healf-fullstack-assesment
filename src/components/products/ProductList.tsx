@@ -14,7 +14,7 @@ import { getProducts } from '@/lib/actions/services/products';
 
 // Types
 import { Pagination as PaginationType } from '@/lib/actions/types/pagination';
-import { Product } from '@/types/product';
+import { Product, QueryParams } from '@/types/product';
 
 // Others
 import { PER_PAGE_LIMIT } from '@/lib/constants';
@@ -24,13 +24,13 @@ type Pagination = Omit<PaginationType<Product>, 'data'>;
 interface ProductListProps {
   products: Product[];
   pagination: Pagination;
-  query?: string;
+  params: QueryParams;
 }
 
 export default function ProductList({
   products: initialProducts,
   pagination: initialPagination,
-  query
+  params
 }: ProductListProps) {
   const [products, setProducts] = useState<Product[]>(initialProducts);
   const [pagination, setPagination] = useState<Pagination>(initialPagination);
@@ -45,7 +45,7 @@ export default function ProductList({
       const { data: newProducts, ...newPagination } = await getProducts({
         page: pagination.page + 1,
         limit: PER_PAGE_LIMIT,
-        query
+        ...params
       });
 
       setProducts((prev) => [...prev, ...newProducts]);
