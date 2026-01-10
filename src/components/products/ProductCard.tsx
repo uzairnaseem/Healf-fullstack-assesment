@@ -1,18 +1,23 @@
 // Components
-import CardMedia from '@mui/material/CardMedia';
+import Image from 'next/image';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Rating from '@mui/material/Rating';
+import Tooltip from '@mui/material/Tooltip';
 
 // Types
 import { Product } from '@/types/product';
 
 // Others
-import { ProductCardContainer, ProductCardTitle } from '../common/StyledComponents';
 import { getProductPrice } from '@/lib/helpers';
+import {
+  ProductCardContainer,
+  ProductCardImage,
+  ProductCardRatingContainer,
+  ProductCardTitle
+} from '../common/StyledComponents';
 
 interface ProductCardProps {
   product: Product;
@@ -22,28 +27,26 @@ export default function ProductCard({ product }: ProductCardProps) {
   const price = getProductPrice(product);
 
   return (
-    <ProductCardContainer as="article" aria-label={`${product.title} product card`}>
-      <Box sx={{ position: 'relative' }}>
-        <CardMedia
-          component="img"
-          height="240"
-          image={product.featuredImage?.url}
+    <ProductCardContainer component="article" aria-label={`${product.title} product card`}>
+      <ProductCardImage>
+        <Image
+          src={product.featuredImage?.url || ''}
           alt={product.featuredImage?.alt || product.title}
+          layout="fill"
+          objectFit="contain"
           loading="lazy"
-          sx={{
-            objectFit: 'cover',
-            backgroundColor: 'grey.100'
-          }}
         />
-      </Box>
+      </ProductCardImage>
 
-      <CardContent sx={{ flexGrow: 1, pb: 1 }}>
+      <CardContent sx={{ flexGrow: 1, py: 1, px: 0 }}>
         <Typography color="text.secondary" sx={{ fontSize: '0.8rem' }}>
           {product.vendor}
         </Typography>
-        <ProductCardTitle>{product.title}</ProductCardTitle>
+        <Tooltip title={product.title}>
+          <ProductCardTitle>{product.title}</ProductCardTitle>
+        </Tooltip>
 
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, mt: 1 }}>
+        <ProductCardRatingContainer>
           <Rating
             value={product.reviews?.average || 0}
             precision={0.1}
@@ -54,12 +57,12 @@ export default function ProductCard({ product }: ProductCardProps) {
           <Typography variant="caption" color="text.secondary">
             {product.reviews?.count || 0} {product.reviews?.count === 1 ? 'Review' : 'Reviews'}
           </Typography>
-        </Box>
+        </ProductCardRatingContainer>
 
-        <Typography sx={{ mt: 1, fontWeight: 600 }}>{price}</Typography>
+        <Typography fontSize="0.9rem">{price}</Typography>
       </CardContent>
 
-      <CardActions sx={{ px: 2, pb: 2 }}>
+      <CardActions sx={{ p: 0 }}>
         <Button
           fullWidth
           variant="outlined"

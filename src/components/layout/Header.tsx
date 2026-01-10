@@ -15,7 +15,7 @@ export default function Header() {
     <AppBar position="sticky" color="transparent" elevation={1}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', mx: 'auto' }}>
             <HealthAndSafetyIcon color="primary" fontSize="large" sx={{ mr: 1 }} />
 
             <Typography variant="h6">Health Supplements</Typography>

@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 import { SortControlsContainer } from '../common/StyledComponents';
 
 // Others
-import SortIcon from '@mui/icons-material/Sort';
+import SwapVertIcon from '@mui/icons-material/SwapVert';
 import { SortOption } from '@/lib/actions/types/products';
 
 interface SortControlsProps {
@@ -46,7 +46,7 @@ export default function SortControls({ resultCount }: SortControlsProps) {
       </Typography>
 
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-        <SortIcon sx={{ color: 'action.active' }} fontSize="small" />
+        <SwapVertIcon sx={{ color: 'action.active' }} fontSize="small" />
         <FormControl size="small" sx={{ minWidth: 200 }}>
           <Select value={sortOption} onChange={handleChange} aria-label="Sort products by">
             <MenuItem value="relevance">Most Relevant</MenuItem>

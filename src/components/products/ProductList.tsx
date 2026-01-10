@@ -1,23 +1,18 @@
 'use client';
 
-// Packages
-import { useEffect, useState } from 'react';
-
 // Components
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import ProductCard from './ProductCard';
 import LoadMoreTrigger from '../common/LoadMoreTrigger';
 
-// Actions
-import { getProducts } from '@/lib/actions/services/products';
+// Hooks
+import { useInfiniteProducts } from '@/hooks/useInfiniteProducts';
 
 // Types
 import { Pagination as PaginationType } from '@/lib/actions/types/pagination';
 import { Product, QueryParams } from '@/types/product';
-
-// Others
-import { PER_PAGE_LIMIT } from '@/lib/constants';
+import { Box } from '@mui/material';
 
 type Pagination = Omit<PaginationType<Product>, 'data'>;
 
@@ -32,39 +27,15 @@ export default function ProductList({
   pagination: initialPagination,
   params
 }: ProductListProps) {
-  const [products, setProducts] = useState<Product[]>(initialProducts);
-  const [pagination, setPagination] = useState<Pagination>(initialPagination);
-  const [loading, setLoading] = useState(false);
-
-  const loadMore = async () => {
-    const { hasMore } = pagination;
-    if (loading || !hasMore) return;
-
-    setLoading(true);
-    try {
-      const { data: newProducts, ...newPagination } = await getProducts({
-        page: pagination.page + 1,
-        limit: PER_PAGE_LIMIT,
-        ...params
-      });
-
-      setProducts((prev) => [...prev, ...newProducts]);
-      setPagination(newPagination);
-    } catch (error) {
-      console.error('Error loading more products:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    setProducts(initialProducts);
-    setPagination(initialPagination);
-  }, [initialProducts, initialPagination]);
+  const { products, pagination, loadMore } = useInfiniteProducts({
+    initialProducts,
+    initialPagination,
+    params
+  });
 
   return (
-    <>
-      <Grid container spacing={2}>
+    <Box sx={{ maxHeight: screen.height * 0.7, overflowY: 'auto' }}>
+      <Grid container rowSpacing={4} columnSpacing={3}>
         {products.map((product) => (
           <Grid key={product.id} size={{ xs: 12, md: 6, lg: 4 }}>
             <ProductCard product={product} />
@@ -79,6 +50,6 @@ export default function ProductList({
           No more products
         </Typography>
       )}
-    </>
+    </Box>
   );
 }
