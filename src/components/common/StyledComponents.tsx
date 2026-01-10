@@ -9,6 +9,8 @@ import {
   CardMedia,
   CardProps,
   Container,
+  Fab,
+  IconButton,
   Paper,
   styled,
   Typography
@@ -121,10 +123,12 @@ export const SortControlsContainer = styled(Box)(({ theme }) => ({
 }));
 
 // Filter Panel
-export const FilterPanelContainer = styled(Paper)(() => ({
-  maxHeight: screen.height * 0.8,
-  overflowY: 'auto',
-  overflowX: 'hidden',
+export const FilterPanelContainer = styled(Paper)(({ theme }) => ({
+  [theme.breakpoints.up('sm')]: {
+    maxHeight: screen.height * 0.8,
+    overflowY: 'auto',
+    overflowX: 'hidden'
+  },
   [`& .${accordionSummaryClasses.root}, & .${accordionDetailsClasses.root}`]: { padding: 0 }
 }));
 
@@ -139,6 +143,17 @@ export const FilterPanelTitleContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   gap: theme.spacing(1)
+}));
+
+export const FiltersMobileViewButton = styled(Fab)(() => ({
+  position: 'fixed',
+  bottom: 24,
+  right: 24,
+  zIndex: 1000
+}));
+
+export const FiltersMobileViewCloseButton = styled(IconButton)(() => ({
+  marginLeft: 'auto'
 }));
 
 // Active Filters

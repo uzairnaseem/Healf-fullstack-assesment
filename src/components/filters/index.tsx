@@ -1,5 +1,5 @@
 // Components
-import FilterPanel from './FilterPanel';
+import FilterPanelWrapper from './FilterPanelWrapper';
 
 // Actions
 import { getFilters } from '@/lib/actions/services/products';
@@ -13,5 +13,7 @@ export default async function ProductFilters() {
 
   const { vendors, productTypes, priceRange } = filters;
 
-  return <FilterPanel vendors={vendors} productTypes={productTypes} priceRange={priceRange} />;
+  return (
+    <FilterPanelWrapper vendors={vendors} productTypes={productTypes} priceRange={priceRange} />
+  );
 }

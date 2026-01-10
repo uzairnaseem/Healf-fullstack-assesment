@@ -22,7 +22,7 @@ export default async function Home(params: HomeProps) {
 
   return (
     <Container maxWidth="xl" sx={{ py: 4 }}>
-      <Grid container spacing={2}>
+      <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 2.5 }}>
           <Suspense fallback={<FilterSkeleton />}>
             <ProductFilters />

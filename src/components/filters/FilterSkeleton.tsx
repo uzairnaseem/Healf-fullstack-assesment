@@ -6,7 +6,9 @@ import { FilterPanelContainer, FilterPanelHeaderContainer } from '../common/Styl
 
 export default function FilterSkeleton() {
   return (
-    <FilterPanelContainer elevation={0}>
+    <FilterPanelContainer
+      sx={{ display: { sm: 'none !important', md: 'block !important' } }}
+      elevation={0}>
       <FilterPanelHeaderContainer>
         <Skeleton variant="text" width={100} height={32} />
         <Skeleton variant="rounded" width={80} height={28} />
