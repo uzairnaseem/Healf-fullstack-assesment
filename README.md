@@ -99,12 +99,19 @@ Products can be filterd by:
 
 **CSV Structure:**
 
-- Assumed standard e-commerce product fields (title, decription, featured images, rating, etc)
+- Assumed standard e-commerce product fields (title, decription, status, featured images, reviews, etc)
+
+**Product Visibility:**
+
+- Only products with ACTIVE status are displayed
+- Only published products are shown
+- Excluded products where deletedAt is not null
+- Only products with available inventory are visible to users
 
 **Search Scope:**
 
 - Prioritized title and vendor matches over description for better relevance
-- Assumed users search by product name, tags
+- Assumed users search by product name, vendor, description, types and tags
 
 ## Architecture Overview
 
