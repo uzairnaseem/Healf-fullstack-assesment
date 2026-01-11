@@ -125,7 +125,7 @@ export const SortControlsContainer = styled(Box)(({ theme }) => ({
 // Filter Panel
 export const FilterPanelContainer = styled(Paper)(({ theme }) => ({
   [theme.breakpoints.up('sm')]: {
-    maxHeight: screen.height * 0.8,
+    maxHeight: '80vh',
     overflowY: 'auto',
     overflowX: 'hidden'
   },

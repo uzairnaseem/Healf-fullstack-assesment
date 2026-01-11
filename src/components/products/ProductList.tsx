@@ -34,7 +34,7 @@ export default function ProductList({
   });
 
   return (
-    <Box sx={{ maxHeight: screen.height * 0.7, overflowY: 'auto' }}>
+    <Box sx={{ maxHeight: '70vh', overflowY: 'auto' }}>
       <Grid container rowSpacing={4} columnSpacing={3}>
         {products.map((product) => (
           <Grid key={product.id} size={{ xs: 12, md: 6, lg: 4 }}>
